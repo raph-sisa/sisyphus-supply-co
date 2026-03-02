@@ -1,0 +1,1362 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sisyphus Supply Co. — Goods for the Meanwhile</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&display=swap');
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --cream: #F6F1EB;
+    --cream-dark: #EDE6DC;
+    --warm-white: #FDFBF8;
+    --text: #2C2420;
+    --text-soft: #6B5E54;
+    --text-faint: #9C8E82;
+    --accent: #8B6F5C;
+    --accent-hover: #735A49;
+    --terracotta: #C4785C;
+    --terracotta-soft: #D4977F;
+    --sage: #7B8B6F;
+    --sage-soft: #A8B49E;
+    --border: #DDD5CB;
+    --border-light: #EAE4DC;
+    --card-bg: #FDFBF8;
+    --overlay: rgba(44, 36, 32, 0.55);
+  }
+
+  body {
+    font-family: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--cream);
+    color: var(--text);
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  /* ===== UTILITY ===== */
+  .serif { font-family: 'Cormorant Garamond', 'Georgia', serif; }
+
+  /* ===== ANNOUNCEMENT BAR ===== */
+  .announcement-bar {
+    background: var(--text);
+    color: var(--cream);
+    text-align: center;
+    padding: 11px 20px;
+    font-size: 11.5px;
+    font-weight: 400;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .announcement-bar span { opacity: 0.3; margin: 0 16px; }
+
+  /* ===== HEADER ===== */
+  header {
+    background: var(--cream);
+    border-bottom: 1px solid var(--border-light);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .header-inner {
+    max-width: 1340px;
+    margin: 0 auto;
+    padding: 0 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 80px;
+  }
+  .logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 500;
+    letter-spacing: -0.3px;
+    color: var(--text);
+    text-decoration: none;
+  }
+  .logo em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--text-faint);
+    font-size: 13px;
+    margin-left: 10px;
+    font-family: 'DM Sans', sans-serif;
+    letter-spacing: 1px;
+  }
+  nav { display: flex; gap: 36px; align-items: center; }
+  nav a {
+    text-decoration: none;
+    color: var(--text-soft);
+    font-size: 13px;
+    font-weight: 400;
+    letter-spacing: 0.8px;
+    text-transform: uppercase;
+    transition: color 0.3s;
+  }
+  nav a:hover { color: var(--text); }
+  .nav-icons { display: flex; gap: 24px; align-items: center; }
+  .nav-icons a {
+    color: var(--text-soft);
+    text-decoration: none;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+    transition: color 0.3s;
+  }
+  .nav-icons a:hover { color: var(--text); }
+  .cart-count {
+    background: var(--terracotta);
+    color: white;
+    font-size: 9px;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 4px;
+    vertical-align: middle;
+    font-weight: 500;
+  }
+
+  /* ===== HERO ===== */
+  .hero {
+    background: var(--text);
+    color: var(--cream);
+    padding: 120px 48px 130px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background:
+      radial-gradient(ellipse at 20% 80%, rgba(196, 120, 92, 0.08) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 20%, rgba(123, 139, 111, 0.06) 0%, transparent 60%);
+  }
+  .hero::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(246,241,235,0.15), transparent);
+  }
+  .hero-content { position: relative; max-width: 740px; margin: 0 auto; }
+  .hero-eyebrow {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    opacity: 0.45;
+    margin-bottom: 28px;
+    font-weight: 400;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 58px;
+    font-weight: 300;
+    line-height: 1.15;
+    margin-bottom: 28px;
+    letter-spacing: -0.5px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    font-weight: 300;
+  }
+  .hero p {
+    font-size: 16px;
+    opacity: 0.55;
+    max-width: 500px;
+    margin: 0 auto 44px;
+    line-height: 1.8;
+    font-weight: 300;
+  }
+  .hero-btn {
+    display: inline-block;
+    background: transparent;
+    color: var(--cream);
+    padding: 16px 44px;
+    font-size: 11px;
+    font-weight: 500;
+    text-decoration: none;
+    letter-spacing: 2.5px;
+    text-transform: uppercase;
+    border: 1px solid rgba(246,241,235,0.3);
+    transition: all 0.4s;
+  }
+  .hero-btn:hover {
+    background: var(--cream);
+    color: var(--text);
+    border-color: var(--cream);
+  }
+
+  /* ===== TRUST BAR ===== */
+  .trust-bar {
+    background: var(--warm-white);
+    border-bottom: 1px solid var(--border-light);
+    padding: 22px 48px;
+  }
+  .trust-bar-inner {
+    max-width: 1340px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    gap: 56px;
+    flex-wrap: wrap;
+  }
+  .trust-item {
+    font-size: 11.5px;
+    color: var(--text-faint);
+    letter-spacing: 0.5px;
+    font-weight: 400;
+  }
+
+  /* ===== PHILOSOPHY ===== */
+  .philosophy {
+    max-width: 680px;
+    margin: 0 auto;
+    padding: 96px 48px;
+    text-align: center;
+  }
+  .philosophy blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.7;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+  .philosophy cite {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 11px;
+    font-style: normal;
+    color: var(--text-faint);
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-weight: 400;
+  }
+  .philosophy .sep {
+    display: block;
+    width: 48px;
+    height: 1px;
+    background: var(--border);
+    margin: 36px auto;
+  }
+  .philosophy .note {
+    font-size: 15px;
+    color: var(--text-soft);
+    line-height: 1.85;
+    max-width: 520px;
+    margin: 0 auto;
+    font-weight: 300;
+  }
+
+  /* ===== SECTION ===== */
+  .section {
+    max-width: 1340px;
+    margin: 0 auto;
+    padding: 96px 48px;
+  }
+  .section-header {
+    text-align: center;
+    margin-bottom: 64px;
+  }
+  .section-header h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    font-weight: 400;
+    margin-bottom: 16px;
+    letter-spacing: -0.3px;
+  }
+  .section-header p {
+    color: var(--text-soft);
+    font-size: 15px;
+    max-width: 520px;
+    margin: 0 auto;
+    line-height: 1.75;
+    font-weight: 300;
+  }
+
+  /* ===== PRODUCT GRID ===== */
+  .product-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+  }
+  .product-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border-light);
+    overflow: hidden;
+    transition: all 0.4s ease;
+    cursor: pointer;
+    position: relative;
+  }
+  .product-card:hover {
+    box-shadow: 0 12px 40px rgba(44, 36, 32, 0.08);
+    transform: translateY(-3px);
+  }
+  .product-img {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: linear-gradient(145deg, var(--cream-dark) 0%, var(--cream) 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 56px;
+    position: relative;
+    overflow: hidden;
+  }
+  .product-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transition: transform 0.6s ease;
+  }
+  .product-card:hover .product-img img {
+    transform: scale(1.03);
+  }
+  /* subtle texture overlay — only on emoji placeholders */
+  .product-img:not(.has-image)::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 50% 30%, rgba(255,255,255,0.3) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .product-img .badge {
+    position: absolute;
+    top: 16px;
+    left: 16px;
+    padding: 5px 12px;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    z-index: 2;
+  }
+  .badge-limited {
+    background: rgba(196, 120, 92, 0.12);
+    color: var(--terracotta);
+  }
+  .badge-new {
+    background: rgba(123, 139, 111, 0.12);
+    color: var(--sage);
+  }
+  .badge-sale {
+    background: rgba(44, 36, 32, 0.08);
+    color: var(--text-soft);
+  }
+  .badge-bestseller {
+    background: rgba(139, 111, 92, 0.12);
+    color: var(--accent);
+  }
+  .product-info { padding: 20px 20px 24px; }
+  .product-category {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-faint);
+    margin-bottom: 8px;
+    font-weight: 400;
+  }
+  .product-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    line-height: 1.3;
+    letter-spacing: -0.2px;
+  }
+  .product-desc {
+    font-size: 12.5px;
+    color: var(--text-soft);
+    margin-bottom: 14px;
+    line-height: 1.6;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    font-weight: 300;
+  }
+  .product-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .product-price {
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--text);
+  }
+  .product-price .original {
+    text-decoration: line-through;
+    color: var(--text-faint);
+    font-weight: 300;
+    margin-right: 8px;
+    font-size: 13px;
+  }
+  .product-rating {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 11px;
+    color: var(--text-faint);
+  }
+  .stars { color: var(--terracotta-soft); letter-spacing: 1px; font-size: 12px; }
+
+  /* ===== EDITORIAL BREAK ===== */
+  .editorial {
+    background: var(--warm-white);
+    border-top: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--border-light);
+  }
+  .editorial-inner {
+    max-width: 1340px;
+    margin: 0 auto;
+    padding: 0;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 640px;
+  }
+  .editorial-img {
+    background: linear-gradient(160deg, #D4C4B0 0%, #C4B5A2 40%, #B8A894 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 140px;
+    position: relative;
+    overflow: hidden;
+  }
+  .editorial-img::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 40% 40%, rgba(255,255,255,0.2) 0%, transparent 60%);
+  }
+  .editorial-text {
+    display: flex;
+    align-items: center;
+    padding: 80px 72px;
+  }
+  .editorial-text-inner { max-width: 440px; }
+  .editorial-text .eyebrow {
+    font-size: 10px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--text-faint);
+    margin-bottom: 20px;
+    font-weight: 400;
+  }
+  .editorial-text h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 40px;
+    font-weight: 400;
+    margin-bottom: 20px;
+    line-height: 1.2;
+    letter-spacing: -0.3px;
+  }
+  .editorial-text p {
+    color: var(--text-soft);
+    font-size: 14.5px;
+    line-height: 1.8;
+    margin-bottom: 24px;
+    font-weight: 300;
+  }
+  .editorial-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 400;
+    margin-bottom: 32px;
+    color: var(--text);
+  }
+  .editorial-btn {
+    display: inline-block;
+    background: var(--text);
+    color: var(--cream);
+    padding: 16px 40px;
+    font-size: 11px;
+    font-weight: 500;
+    text-decoration: none;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    transition: all 0.4s;
+  }
+  .editorial-btn:hover { background: var(--accent); }
+  .editorial-details {
+    margin-top: 28px;
+    display: flex;
+    gap: 20px;
+  }
+  .editorial-details span {
+    font-size: 11px;
+    color: var(--text-faint);
+    letter-spacing: 0.3px;
+  }
+
+  /* ===== TESTIMONIALS ===== */
+  .testimonials {
+    background: var(--warm-white);
+    border-top: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--border-light);
+  }
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1px;
+    background: var(--border-light);
+  }
+  .testimonial {
+    padding: 48px 40px;
+    background: var(--warm-white);
+  }
+  .testimonial .stars { margin-bottom: 20px; display: block; }
+  .testimonial p {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--text);
+    margin-bottom: 24px;
+    font-style: italic;
+    font-weight: 300;
+  }
+  .testimonial-author {
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+  .testimonial-meta {
+    font-size: 11px;
+    color: var(--text-faint);
+    margin-top: 2px;
+    letter-spacing: 0.3px;
+  }
+
+  /* ===== VALUES STRIP ===== */
+  .values {
+    padding: 80px 48px;
+    max-width: 1340px;
+    margin: 0 auto;
+  }
+  .values-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 40px;
+    text-align: center;
+  }
+  .value-item {}
+  .value-icon {
+    font-size: 28px;
+    margin-bottom: 16px;
+    display: block;
+  }
+  .value-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 20px;
+    font-weight: 500;
+    margin-bottom: 8px;
+  }
+  .value-desc {
+    font-size: 13px;
+    color: var(--text-soft);
+    line-height: 1.7;
+    font-weight: 300;
+  }
+
+  /* ===== EMAIL SIGNUP ===== */
+  .signup {
+    background: var(--text);
+    color: var(--cream);
+    text-align: center;
+    padding: 96px 48px;
+    position: relative;
+  }
+  .signup::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 50% 50%, rgba(196, 120, 92, 0.05) 0%, transparent 70%);
+  }
+  .signup > * { position: relative; }
+  .signup h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 38px;
+    font-weight: 300;
+    margin-bottom: 16px;
+  }
+  .signup p {
+    opacity: 0.5;
+    font-size: 14px;
+    margin-bottom: 40px;
+    max-width: 460px;
+    margin-left: auto;
+    margin-right: auto;
+    line-height: 1.75;
+    font-weight: 300;
+  }
+  .signup-form {
+    display: flex;
+    max-width: 440px;
+    margin: 0 auto;
+    gap: 0;
+  }
+  .signup-form input {
+    flex: 1;
+    padding: 16px 20px;
+    border: 1px solid rgba(246,241,235,0.15);
+    background: rgba(246,241,235,0.06);
+    color: var(--cream);
+    font-size: 13px;
+    font-family: inherit;
+    outline: none;
+    letter-spacing: 0.3px;
+  }
+  .signup-form input::placeholder { color: rgba(246,241,235,0.35); }
+  .signup-form input:focus { border-color: rgba(246,241,235,0.3); }
+  .signup-form button {
+    padding: 16px 32px;
+    background: var(--cream);
+    color: var(--text);
+    border: none;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    font-family: inherit;
+    transition: all 0.3s;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+  }
+  .signup-form button:hover { background: var(--cream-dark); }
+
+  /* ===== FOOTER ===== */
+  footer {
+    background: var(--warm-white);
+    border-top: 1px solid var(--border-light);
+    padding: 72px 48px 48px;
+  }
+  .footer-inner {
+    max-width: 1340px;
+    margin: 0 auto;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 2.5fr 1fr 1fr 1fr;
+    gap: 56px;
+    margin-bottom: 56px;
+  }
+  .footer-brand .logo {
+    font-size: 22px;
+    display: block;
+    margin-bottom: 16px;
+  }
+  .footer-brand p {
+    font-size: 13px;
+    color: var(--text-soft);
+    line-height: 1.7;
+    max-width: 300px;
+    font-weight: 300;
+  }
+  .footer-col h4 {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    margin-bottom: 20px;
+    font-weight: 500;
+    color: var(--text);
+  }
+  .footer-col a {
+    display: block;
+    font-size: 13px;
+    color: var(--text-soft);
+    text-decoration: none;
+    margin-bottom: 12px;
+    transition: color 0.3s;
+    font-weight: 300;
+  }
+  .footer-col a:hover { color: var(--text); }
+  .footer-bottom {
+    border-top: 1px solid var(--border-light);
+    padding-top: 28px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 11px;
+    color: var(--text-faint);
+    letter-spacing: 0.3px;
+  }
+  .footer-payments { display: flex; gap: 8px; }
+  .payment-icon {
+    background: var(--cream);
+    border: 1px solid var(--border-light);
+    padding: 4px 10px;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 0.5px;
+  }
+
+  /* ===== PRODUCT DETAIL MODAL ===== */
+  .modal-overlay {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: var(--overlay);
+    z-index: 1000;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+    backdrop-filter: blur(4px);
+  }
+  .modal-overlay.active { display: flex; }
+  .modal {
+    background: var(--warm-white);
+    max-width: 920px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .modal-img {
+    background: linear-gradient(145deg, var(--cream-dark) 0%, var(--cream) 100%);
+    aspect-ratio: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    font-size: 100px;
+    min-height: 400px;
+  }
+  .modal-content { padding: 48px; }
+  .modal-content .product-category { margin-bottom: 8px; }
+  .modal-content h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 30px;
+    margin-bottom: 8px;
+    font-weight: 400;
+    letter-spacing: -0.3px;
+  }
+  .modal-content .modal-rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    font-size: 12px;
+    color: var(--text-faint);
+  }
+  .modal-content .modal-price {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 400;
+    margin-bottom: 20px;
+  }
+  .modal-content .modal-desc {
+    font-size: 13.5px;
+    color: var(--text-soft);
+    line-height: 1.8;
+    margin-bottom: 28px;
+    font-weight: 300;
+  }
+  .modal-features {
+    margin-bottom: 28px;
+    font-size: 12.5px;
+  }
+  .modal-features div {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-light);
+    display: flex;
+    justify-content: space-between;
+  }
+  .modal-features div:last-child { border: none; }
+  .modal-features .label { color: var(--text-faint); font-weight: 400; }
+  .modal-features .label + span { text-align: right; font-weight: 300; color: var(--text-soft); }
+  .add-to-cart {
+    width: 100%;
+    padding: 17px;
+    background: var(--text);
+    color: var(--cream);
+    border: none;
+    font-size: 11px;
+    font-weight: 500;
+    cursor: pointer;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: inherit;
+    transition: background 0.4s;
+    margin-bottom: 14px;
+  }
+  .add-to-cart:hover { background: var(--accent); }
+  .modal-shipping {
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-faint);
+    letter-spacing: 0.3px;
+  }
+
+  /* ===== RESPONSIVE ===== */
+  @media (max-width: 1100px) {
+    .product-grid { grid-template-columns: repeat(2, 1fr); }
+    .values-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 900px) {
+    .hero h1 { font-size: 40px; }
+    .editorial-inner { grid-template-columns: 1fr; }
+    .editorial-img { min-height: 360px; }
+    .editorial-text { padding: 56px 40px; }
+    .testimonials-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr 1fr; }
+    .modal { grid-template-columns: 1fr; }
+    .modal-img { min-height: 280px; }
+  }
+  @media (max-width: 600px) {
+    .header-inner { padding: 0 24px; }
+    nav { display: none; }
+    .hero { padding: 72px 24px 80px; }
+    .hero h1 { font-size: 32px; }
+    .section { padding: 64px 24px; }
+    .product-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; gap: 36px; }
+    .philosophy { padding: 64px 24px; }
+    .philosophy blockquote { font-size: 22px; }
+    .values-grid { grid-template-columns: 1fr; gap: 32px; }
+    .editorial-text { padding: 48px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="announcement-bar">
+  Complimentary shipping on orders over $75 <span>&middot;</span> Made with care in a world that may not reciprocate <span>&middot;</span> Code KEEPGOING for 15% off
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="header-inner">
+    <a href="#" class="logo">Sisyphus Supply Co.<em>est. regardless</em></a>
+    <nav>
+      <a href="#products">Shop</a>
+      <a href="#featured">Favorites</a>
+      <a href="#">New</a>
+      <a href="#">Our Why</a>
+      <a href="#">Journal</a>
+    </nav>
+    <div class="nav-icons">
+      <a href="#">Search</a>
+      <a href="#">Account</a>
+      <a href="#">Bag <span class="cart-count">2</span></a>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-content">
+    <div class="hero-eyebrow">For the meanwhile &mdash; Spring 2026</div>
+    <h1>The World Is Ending and You <em>Still Need a Nice Candle</em></h1>
+    <p>The ecosystems are collapsing, everyone hates each other, and the kids are making memes about it. We opened a shop anyway. Someone has to.</p>
+    <a href="#products" class="hero-btn">Shop the Collection</a>
+  </div>
+</div>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-bar-inner">
+    <div class="trust-item">&#9733; 4.9 from 11,204 reviews</div>
+    <div class="trust-item">&#183; Carbon-neutral shipping (we're trying)</div>
+    <div class="trust-item">&#183; Satisfaction guaranteed, nothing else</div>
+    <div class="trust-item">&#183; Worker-owned since 2024</div>
+  </div>
+</div>
+
+<!-- PHILOSOPHY -->
+<div class="philosophy">
+  <blockquote>"The struggle itself toward the heights is enough to fill a man's heart. One must imagine Sisyphus happy."</blockquote>
+  <cite>Albert Camus, 1942</cite>
+  <span class="sep"></span>
+  <p class="note">We believe the boulder is a metaphor, but also that it could use a nice carrying case. Our products won't fix anything. They're not supposed to. They're for the space between scrolling past the latest collapse and getting up to make coffee anyway.</p>
+</div>
+
+<!-- PRODUCTS -->
+<div class="section" id="products">
+  <div class="section-header">
+    <h2>Goods for the Meanwhile</h2>
+    <p>Not solutions. Not coping mechanisms. Just well-made things for people who are still here and might as well have something nice while they figure out if that matters.</p>
+  </div>
+
+  <div class="product-grid">
+
+    <div class="product-card" onclick="openModal(0)">
+      <div class="product-img has-image">
+        <img src="old-growth-candle.png" alt="Old Growth Candle — hand-poured soy candle in stoneware vessel" loading="lazy">
+        <span class="badge badge-bestseller">Bestseller</span>
+      </div>
+      <div class="product-info">
+        <div class="product-category">Home &amp; Atmosphere</div>
+        <div class="product-name">Old Growth Candle</div>
+        <div class="product-desc">Hand-poured soy candle scented like a forest that still exists. Notes of Douglas fir, wet lichen, and soil that hasn't been paved over yet.</div>
+        <div class="product-bottom">
+          <div class="product-price">$38</div>
+          <div class="product-rating"><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 2,847</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card" onclick="openModal(1)">
+      <div class="product-img has-image">
+        <img src="discourse-earplugs.png" alt="The Discourse Earplugs — premium silicone earplugs in aluminum case" loading="lazy">
+        <span class="badge badge-bestseller">Bestseller</span>
+      </div>
+      <div class="product-info">
+        <div class="product-category">Wellness</div>
+        <div class="product-name">The Discourse Earplugs</div>
+        <div class="product-desc">Premium silicone earplugs for conversational environments where agreement is no longer structurally possible. NRR 33dB.</div>
+        <div class="product-bottom">
+          <div class="product-price">$28</div>
+          <div class="product-rating"><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 4,102</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card" onclick="openModal(2)">
+      <div class="product-img has-image">
+        <img src="doom-scroll-mittens.png" alt="Doom Scroll Mittens — merino wool mittens in Dread Grey" loading="lazy">
+        <span class="badge badge-new">New</span>
+      </div>
+      <div class="product-info">
+        <div class="product-category">Accessories</div>
+        <div class="product-name">Doom Scroll Mittens</div>
+        <div class="product-desc">Merino wool mittens, touchscreen-compatible on the index finger only. Because you were only going to use that one anyway.</div>
+        <div class="product-bottom">
+          <div class="product-price">$54</div>
+          <div class="product-rating"><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 1,293</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card" onclick="openModal(3)">
+      <div class="product-img has-image">
+        <img src="one-page-planner.png" alt="The One-Page Planner — leather-bound journal with single undated page" loading="lazy">
+        <span class="badge badge-sale">20% Off</span>
+      </div>
+      <div class="product-info">
+        <div class="product-category">Planning</div>
+        <div class="product-name">The One-Page Planner&trade;</div>
+        <div class="product-desc">Premium leather-bound planner with a single, undated page. An act of honesty about how much future we're comfortable committing to.</div>
+        <div class="product-bottom">
+          <div class="product-price"><span class="original">$55</span> $44</div>
+          <div class="product-rating"><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 3,671</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card" onclick="openModal(4)">
+      <div class="product-img has-image">
+        <img src="good-news-dispatch.png" alt="The Good News Dispatch — single-sheet newspaper on linen surface" loading="lazy">
+        <span class="badge badge-limited">Limited</span>
+      </div>
+      <div class="product-info">
+        <div class="product-category">Print</div>
+        <div class="product-name">The Good News Dispatch</div>
+        <div class="product-desc">A single-sheet newspaper that only prints objectively verifiable good news. Arrives weekly. Usually blank. Occasionally a paragraph.</div>
+        <div class="product-bottom">
+          <div class="product-price">$6<span style="font-weight:300;font-size:12px;color:var(--text-faint)"> /issue</span></div>
+          <div class="product-rating"><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9734;</span> 891</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card" onclick="openModal(5)">
+      <div class="product-img has-image">
+        <img src="meme-archive.png" alt="The Meme Archive Vol. I — sage hardcover book on wooden table" loading="lazy">
+        <span class="badge badge-new">New</span>
+      </div>
+      <div class="product-info">
+        <div class="product-category">Print &amp; Archive</div>
+        <div class="product-name">The Meme Archive, Vol. I</div>
+        <div class="product-desc">The definitive collection, 2020&ndash;2026, printed on archival cotton paper. Because when words failed an entire generation, they posted.</div>
+        <div class="product-bottom">
+          <div class="product-price">$72</div>
+          <div class="product-rating"><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 2,214</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card" onclick="openModal(6)">
+      <div class="product-img has-image">
+        <img src="seed-vault.png" alt="Last Species Seed Vault — walnut box with glass vials of heirloom seeds" loading="lazy">
+        <span class="badge badge-limited">Limited</span>
+      </div>
+      <div class="product-info">
+        <div class="product-category">Living Things</div>
+        <div class="product-name">Last Species Seed Vault</div>
+        <div class="product-desc">Heirloom seeds from 40 plant species currently listed as threatened. Vacuum-sealed in glass. The option is the point.</div>
+        <div class="product-bottom">
+          <div class="product-price">$64</div>
+          <div class="product-rating"><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 1,038</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="product-card" onclick="openModal(7)">
+      <div class="product-img has-image">
+        <img src="anyway-mug.jpg" alt="The Anyway Mug — handmade ceramic with 'anyway' engraved on the bottom" loading="lazy">
+        <span class="badge badge-sale">15% Off</span>
+      </div>
+      <div class="product-info">
+        <div class="product-category">Ritual</div>
+        <div class="product-name">The Anyway Mug</div>
+        <div class="product-desc">Handmade ceramic mug engraved with "anyway" on the bottom, visible only when you finish your coffee. Because you got up. That counts.</div>
+        <div class="product-bottom">
+          <div class="product-price"><span class="original">$36</span> $30.60</div>
+          <div class="product-rating"><span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> 5,447</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- FEATURED / EDITORIAL -->
+<div class="editorial" id="featured">
+  <div class="editorial-inner">
+    <div class="editorial-img" style="background:none;">
+        <img src="meanwhile-clock.png" alt="The Meanwhile Clock — machined aluminum desk clock on live-edge shelf" style="width:100%;height:100%;object-fit:cover;">
+      </div>
+    <div class="editorial-text">
+      <div class="editorial-text-inner">
+        <div class="eyebrow">Editor's Pick</div>
+        <h2>The Meanwhile Clock</h2>
+        <p>A machined aluminum desk clock with no alarm, no date, and no countdown. It tells the current time only. It doesn't track how much time is left, because nobody knows that, and pretending otherwise was making everyone anxious.</p>
+        <p>The second hand moves at exactly one second per second, which we found, after extensive testing, to be the correct speed. When the battery dies, you replace it. The clock keeps going. We liked the metaphor enough to ship it.</p>
+        <div class="editorial-price">$149</div>
+        <a href="#" class="editorial-btn">Add to Bag</a>
+        <div class="editorial-details">
+          <span>&#10003; Complimentary shipping</span>
+          <span>&#10003; Gift wrapping</span>
+          <span>&#10003; B Corp certified</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- VALUES -->
+<div class="values">
+  <div class="values-grid">
+    <div class="value-item">
+      <span class="value-icon">&#9675;</span>
+      <div class="value-title">Made Regardless</div>
+      <div class="value-desc">Every product is designed with the kind of care that only makes sense if you've decided to keep going anyway.</div>
+    </div>
+    <div class="value-item">
+      <span class="value-icon">&#9675;</span>
+      <div class="value-title">Worker-Owned</div>
+      <div class="value-desc">Everyone who makes these products has a stake in them. It felt wrong to do it any other way, given everything.</div>
+    </div>
+    <div class="value-item">
+      <span class="value-icon">&#9675;</span>
+      <div class="value-title">Honestly Sourced</div>
+      <div class="value-desc">We know where every material comes from. We'll tell you if you ask. We'll tell you even if you don't.</div>
+    </div>
+    <div class="value-item">
+      <span class="value-icon">&#9675;</span>
+      <div class="value-title">No False Hope</div>
+      <div class="value-desc">We won't tell you everything will be fine. We'll make you something nice and let you decide for yourself.</div>
+    </div>
+  </div>
+</div>
+
+<!-- TESTIMONIALS -->
+<div class="testimonials">
+  <div class="section" style="padding-left:0;padding-right:0;">
+    <div class="section-header" style="padding: 0 48px;">
+      <h2>What People Are Saying</h2>
+      <p>Real reviews from people who are still buying things despite everything. We find that inspiring, honestly.</p>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial">
+        <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p>"I bought the One-Page Planner as a joke and then I sat with it for twenty minutes and it was the most honest I've been with myself about the future in years. I wrote one sentence. It was enough."</p>
+        <div class="testimonial-author">Sarah M.</div>
+        <div class="testimonial-meta">Verified &middot; Portland, OR</div>
+      </div>
+      <div class="testimonial">
+        <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p>"Lit the Old Growth Candle during a power outage. My apartment smelled like a forest that doesn't have a highway through it. My roommate cried. We didn't talk about it. Five stars."</p>
+        <div class="testimonial-author">Marcus L.</div>
+        <div class="testimonial-meta">Verified &middot; Chicago, IL</div>
+      </div>
+      <div class="testimonial">
+        <span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+        <p>"I'm 24 and I've been telling myself nothing matters for three years. Then the Anyway Mug said 'anyway' at the bottom and I don't know, man. I got up the next day too. Still thinking about it."</p>
+        <div class="testimonial-author">Jordan T.</div>
+        <div class="testimonial-meta">Verified &middot; Austin, TX</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- NEWSLETTER -->
+<div class="signup">
+  <h2>We're Still Here</h2>
+  <p>One email a week. Sometimes new products. Sometimes just a reminder that someone, somewhere, is still making things with their hands and shipping them to strangers, which is either the most absurd or the most hopeful thing we can think of.</p>
+  <div class="signup-form">
+    <input type="email" placeholder="Your email">
+    <button>Subscribe</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="logo">Sisyphus Supply Co.</a>
+        <p>Goods for the meanwhile. Based in Brooklyn, which is also still here. We push the boulder. We make the products. We imagine ourselves happy. You're welcome to join us.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Shop</h4>
+        <a href="#">All Products</a>
+        <a href="#">New Arrivals</a>
+        <a href="#">Favorites</a>
+        <a href="#">Gift Cards</a>
+        <a href="#">Bundles</a>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <a href="#">Our Why</a>
+        <a href="#">Sustainability (Real)</a>
+        <a href="#">Wholesale</a>
+        <a href="#">Careers (Yes, Really)</a>
+        <a href="#">Press</a>
+      </div>
+      <div class="footer-col">
+        <h4>Support</h4>
+        <a href="#">FAQ</a>
+        <a href="#">Shipping &amp; Returns</a>
+        <a href="#">Contact a Human</a>
+        <a href="#">Size Guide</a>
+        <a href="#">Existential FAQ</a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>&copy; 2026 Sisyphus Supply Co. All rights reserved, to the extent that rights still function as a concept.</span>
+      <div class="footer-payments">
+        <span class="payment-icon">Visa</span>
+        <span class="payment-icon">MC</span>
+        <span class="payment-icon">Amex</span>
+        <span class="payment-icon">Apple Pay</span>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<!-- PRODUCT DETAIL MODAL -->
+<div class="modal-overlay" id="modal" onclick="closeModal(event)">
+  <div class="modal" onclick="event.stopPropagation()">
+    <div class="modal-img" id="modal-img"></div>
+    <div class="modal-content">
+      <div class="product-category" id="modal-category"></div>
+      <h2 id="modal-name"></h2>
+      <div class="modal-rating">
+        <span class="stars" id="modal-stars"></span>
+        <span id="modal-reviews"></span>
+      </div>
+      <div class="modal-price" id="modal-price"></div>
+      <div class="modal-desc" id="modal-desc"></div>
+      <div class="modal-features" id="modal-features"></div>
+      <button class="add-to-cart">Add to Bag</button>
+      <div class="modal-shipping">Complimentary shipping over $75 &middot; Returns within 30 days, no questions. We get it.</div>
+    </div>
+  </div>
+</div>
+
+<script>
+const products = [
+  {
+    icon: '\uD83C\uDF32',
+    image: 'old-growth-candle.png',
+    category: 'Home & Atmosphere',
+    name: 'Old Growth Candle',
+    stars: '\u2605\u2605\u2605\u2605\u2605',
+    reviews: '2,847 reviews',
+    price: '$38',
+    desc: 'A hand-poured soy candle scented like a forest that still exists. Top notes of Douglas fir and wet bark. Middle notes of lichen, fern, and the particular smell of air that has been cleaned by something other than a filter. Base notes of mycelium and topsoil \u2014 the kind you can still put your hands in. Each candle is poured in small batches in the Hudson Valley by people who go outside a lot and wanted to bring some of it back. Burns for approximately 60 hours. We cannot promise the forests will last that long, but the candle will.',
+    features: [
+      ['Wax', '100% Soy, hand-poured'],
+      ['Burn Time', '~60 hours'],
+      ['Scent Notes', 'Douglas Fir, Lichen, Petrichor, Topsoil'],
+      ['Vessel', 'Reusable stoneware, made in Beacon, NY'],
+      ['Sourced From', 'Actual field recordings of old-growth forests']
+    ]
+  },
+  {
+    icon: '\uD83D\uDD07',
+    image: 'discourse-earplugs.png',
+    category: 'Wellness',
+    name: 'The Discourse Earplugs',
+    stars: '\u2605\u2605\u2605\u2605\u2605',
+    reviews: '4,102 reviews',
+    price: '$28',
+    desc: 'Premium medical-grade silicone earplugs designed for conversational environments where agreement is no longer structurally possible. Rated NRR 33dB, which is enough to reduce a Thanksgiving dinner to a pleasant murmur. Also effective for: comment sections read aloud, cable news in waiting rooms, and that specific frequency at which strangers explain things to you on the internet. Comes in a matte aluminum case engraved with \u201CI heard you. I disagree. I\u2019m going to go be quiet now.\u201D Reusable. Washable. Necessary.',
+    features: [
+      ['Material', 'Medical-grade silicone, hypoallergenic'],
+      ['Noise Reduction', 'NRR 33dB'],
+      ['Case', 'Anodized aluminum, pocket-sized'],
+      ['Sizes', 'S / M / L included'],
+      ['Engraving', '\u201CI heard you. I disagree. I\u2019m going to go be quiet now.\u201D']
+    ]
+  },
+  {
+    icon: '\uD83E\uDDE4',
+    image: 'doom-scroll-mittens.png',
+    category: 'Accessories',
+    name: 'Doom Scroll Mittens',
+    stars: '\u2605\u2605\u2605\u2605\u2605',
+    reviews: '1,293 reviews',
+    price: '$54',
+    desc: 'Merino wool mittens with conductive thread woven into the right index finger only. Because we watched the data and that\u2019s the only finger anyone uses anymore. The left hand stays warm and offline. The right hand stays warm and makes choices you\u2019ll think about later. Available in Dread Grey, Algorithm Blue, and a limited run of Late Capitalism Burgundy. The interior is lined with a silk-blend that feels nicer than anything you\u2019re reading deserves.',
+    features: [
+      ['Material', '100% Merino wool, silk-blend lining'],
+      ['Touchscreen', 'Right index finger only (by design)'],
+      ['Colors', 'Dread Grey, Algorithm Blue, Late Capitalism Burgundy'],
+      ['Sizes', 'S / M / L / XL'],
+      ['Care', 'Hand wash cold. Like everything worth preserving.']
+    ]
+  },
+  {
+    icon: '\uD83D\uDCDC',
+    image: 'one-page-planner.png',
+    category: 'Planning',
+    name: 'The One-Page Planner\u2122',
+    stars: '\u2605\u2605\u2605\u2605\u2605',
+    reviews: '3,671 reviews',
+    price: '$44',
+    desc: 'A premium Italian leather-bound planner containing a single, undated, unlined page. No quarterly goals. No habit trackers. No vision board. No \u201Cfuture log.\u201D Just one generous sheet of 160gsm Tomoe River paper and the radical admission that you don\u2019t know what\u2019s coming and neither does anyone else. We removed the other 364 pages not out of laziness but out of respect. The binding is Smyth-sewn. The leather will age beautifully. The page will hold whatever you decide to put on it, whenever you\u2019re ready, if you\u2019re ever ready, and that\u2019s fine.',
+    features: [
+      ['Cover', 'Full-grain Italian vegetable-tanned leather'],
+      ['Pages', '1 (one)'],
+      ['Paper', '160gsm Tomoe River, fountain pen friendly'],
+      ['Binding', 'Smyth-sewn (because even minimalism should be well-made)'],
+      ['Dimensions', 'A5 (5.5\u201D x 8.5\u201D)']
+    ]
+  },
+  {
+    icon: '\uD83D\uDCF0',
+    image: 'good-news-dispatch.png',
+    category: 'Print',
+    name: 'The Good News Dispatch',
+    stars: '\u2605\u2605\u2605\u2605\u2606',
+    reviews: '891 reviews',
+    price: '$6 /issue',
+    desc: 'A single-sheet broadsheet newspaper, printed weekly on recycled stock, containing only news that is objectively, verifiably, unambiguously good. No spin. No \u201Cwell, actually.\u201D No \u201Csilver lining\u201D framing of bad news. Just good things that happened. Some weeks the sheet is full. Some weeks it has a single paragraph. Occasionally it arrives blank, which we print and ship anyway, because the paper itself is made by a family mill in Vermont that\u2019s been operating since 1847 and we think that\u2019s worth noting. Subscription auto-renews. Cancel anytime. We understand.',
+    features: [
+      ['Format', 'Broadsheet, single sheet, recycled stock'],
+      ['Frequency', 'Weekly (Fridays)'],
+      ['Editorial Policy', 'Verifiably good news only. No framing.'],
+      ['Paper Mill', 'Family-owned, Vermont, est. 1847'],
+      ['Subscription', 'Auto-renews monthly. Cancel anytime.']
+    ]
+  },
+  {
+    icon: '\uD83D\uDCD6',
+    image: 'meme-archive.png',
+    category: 'Print & Archive',
+    name: 'The Meme Archive, Vol. I',
+    stars: '\u2605\u2605\u2605\u2605\u2605',
+    reviews: '2,214 reviews',
+    price: '$72',
+    desc: 'The definitive collection of internet memes from 2020\u20132026, curated by a team of cultural historians and a 27-year-old who was \u201Cthere for all of it.\u201D Printed on archival 100% cotton paper with museum-quality reproduction. 312 pages. When an entire generation\u2019s response to collapsing systems, political fracture, and ecological grief was to make each other laugh in increasingly compressed image formats \u2014 that\u2019s not a footnote. That\u2019s the primary document. This book treats it accordingly. Includes contextual essays, a timeline, and an index organized by emotional state rather than chronology.',
+    features: [
+      ['Pages', '312, full color'],
+      ['Paper', 'Archival 100% cotton, 150gsm'],
+      ['Binding', 'Smyth-sewn hardcover, cloth spine'],
+      ['Index', 'Organized by emotional state'],
+      ['Dimensions', '9\u201D x 12\u201D (coffee table format)']
+    ]
+  },
+  {
+    icon: '\uD83C\uDF31',
+    image: 'seed-vault.png',
+    category: 'Living Things',
+    name: 'Last Species Seed Vault',
+    stars: '\u2605\u2605\u2605\u2605\u2605',
+    reviews: '1,038 reviews',
+    price: '$64',
+    desc: 'Heirloom seeds from 40 plant species currently listed as vulnerable, endangered, or critically endangered by the IUCN Red List. Each variety is vacuum-sealed in individual glass ampules and housed in a walnut box with brass hardware. Includes a field guide with growing instructions, native range maps, and a brief history of each species written in a tone that is informative but does not pretend to be okay about it. Grow them or don\u2019t. Put the box on a shelf. The option is the point. The possibility is the product.',
+    features: [
+      ['Species', '40 varieties, all IUCN Red List'],
+      ['Packaging', 'Glass ampules in walnut box, brass hardware'],
+      ['Includes', 'Illustrated field guide (112 pages)'],
+      ['Viability', '5\u201310 years sealed, varies by species'],
+      ['Sourced', 'Partner seed banks and botanical gardens']
+    ]
+  },
+  {
+    icon: '\u2615',
+    image: 'anyway-mug.jpg',
+    category: 'Ritual',
+    name: 'The Anyway Mug',
+    stars: '\u2605\u2605\u2605\u2605\u2605',
+    reviews: '5,447 reviews',
+    price: '$30.60',
+    desc: 'A handmade ceramic mug with a single word engraved on the interior bottom, visible only when you finish your drink: \u201Canyway.\u201D That\u2019s the whole product. You wake up. The news is bad. The group chat is worse. You make coffee because that\u2019s what you do. You drink it. At the bottom, the mug says \u201Canyway.\u201D And you go do the next thing. Each mug is thrown and glazed by hand at a small studio in Asheville, NC. No two are identical, which felt right. Dishwasher safe, because not everything has to be precious.',
+    features: [
+      ['Material', 'Stoneware, hand-thrown'],
+      ['Capacity', '12 oz'],
+      ['Engraving', '\u201Canyway\u201D (interior bottom, visible when empty)'],
+      ['Glaze', 'Food-safe, matte exterior, glossy interior'],
+      ['Made In', 'Asheville, NC \u2014 no two are identical']
+    ]
+  }
+];
+
+function openModal(index) {
+  const p = products[index];
+  const modalImg = document.getElementById('modal-img');
+  if (p.image) {
+    modalImg.innerHTML = `<img src="${p.image}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover;">`;
+  } else {
+    modalImg.innerHTML = p.icon;
+  }
+  document.getElementById('modal-category').textContent = p.category;
+  document.getElementById('modal-name').textContent = p.name;
+  document.getElementById('modal-stars').innerHTML = p.stars;
+  document.getElementById('modal-reviews').textContent = p.reviews;
+  document.getElementById('modal-price').textContent = p.price;
+  document.getElementById('modal-desc').textContent = p.desc;
+
+  let featHTML = '';
+  p.features.forEach(f => {
+    featHTML += `<div><span class="label">${f[0]}</span><span>${f[1]}</span></div>`;
+  });
+  document.getElementById('modal-features').innerHTML = featHTML;
+  document.getElementById('modal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal(e) {
+  if (e.target === document.getElementById('modal')) {
+    document.getElementById('modal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+}
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    document.getElementById('modal').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+});
+</script>
+
+</body>
+</html>
