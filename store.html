@@ -1079,6 +1079,380 @@
     letter-spacing: 0.3px;
   }
 
+  /* ===== BARTER / BOULDER EXCHANGE ===== */
+  .barter-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(44, 36, 32, 0.55);
+    z-index: 1050;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s;
+  }
+  .barter-overlay.active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .barter-modal {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0.96);
+    background: var(--warm-white);
+    border-radius: 6px;
+    max-width: 640px;
+    width: 92vw;
+    max-height: 88vh;
+    overflow-y: auto;
+    z-index: 1060;
+    padding: 48px 40px 40px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s, transform 0.35s;
+  }
+  .barter-overlay.active + .barter-modal,
+  .barter-modal.active {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  .barter-close {
+    position: absolute;
+    top: 16px;
+    right: 20px;
+    background: none;
+    border: none;
+    font-size: 28px;
+    cursor: pointer;
+    color: var(--text);
+    line-height: 1;
+  }
+  .barter-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 400;
+    margin-bottom: 4px;
+    color: var(--text);
+  }
+  .barter-subtitle {
+    font-size: 13px;
+    color: var(--text-faint);
+    margin-bottom: 28px;
+    line-height: 1.5;
+  }
+  .barter-progress {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 32px;
+  }
+  .barter-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--border-light);
+    transition: background 0.3s, transform 0.3s;
+  }
+  .barter-dot.active {
+    background: var(--accent);
+    transform: scale(1.25);
+  }
+  .barter-steps {
+    position: relative;
+    overflow: hidden;
+  }
+  .barter-step {
+    display: none;
+  }
+  .barter-step.active {
+    display: block;
+    animation: barterFadeIn 0.35s ease;
+  }
+  @keyframes barterFadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  .barter-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-faint);
+    margin-bottom: 8px;
+    font-weight: 500;
+  }
+  .barter-input {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid var(--border-light);
+    border-radius: 4px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    background: var(--cream);
+    color: var(--text);
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
+  }
+  .barter-input:focus {
+    outline: none;
+    border-color: var(--accent);
+  }
+  .barter-select {
+    width: 100%;
+    padding: 14px 16px;
+    border: 1px solid var(--border-light);
+    border-radius: 4px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    background: var(--cream);
+    color: var(--text);
+    margin-bottom: 20px;
+    box-sizing: border-box;
+    appearance: none;
+    cursor: pointer;
+  }
+  .barter-btn {
+    display: inline-block;
+    background: var(--text);
+    color: var(--cream);
+    border: none;
+    padding: 16px 36px;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background 0.3s;
+    width: 100%;
+    border-radius: 4px;
+  }
+  .barter-btn:hover { background: var(--accent); }
+  .barter-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+  .barter-back {
+    text-align: center;
+    margin-top: 16px;
+    font-size: 13px;
+    color: var(--text-faint);
+    cursor: pointer;
+  }
+  .barter-back:hover { color: var(--text); }
+
+  /* Appraisal animation */
+  .barter-appraisal-status {
+    text-align: center;
+    padding: 48px 0;
+  }
+  .barter-appraisal-status .spinner {
+    display: inline-block;
+    width: 28px;
+    height: 28px;
+    border: 2px solid var(--border-light);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: barterSpin 0.8s linear infinite;
+    margin-bottom: 20px;
+  }
+  @keyframes barterSpin {
+    to { transform: rotate(360deg); }
+  }
+  .barter-appraisal-status .status-text {
+    font-size: 14px;
+    color: var(--text-faint);
+    font-style: italic;
+  }
+  .barter-value-reveal {
+    text-align: center;
+    padding: 24px 0 12px;
+  }
+  .barter-value-reveal .value-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-faint);
+    margin-bottom: 8px;
+  }
+  .barter-value-reveal .value-amount {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 48px;
+    font-weight: 300;
+    color: var(--text);
+    animation: barterValuePop 0.5s ease;
+  }
+  @keyframes barterValuePop {
+    0%   { transform: scale(0.5); opacity: 0; }
+    70%  { transform: scale(1.08); }
+    100% { transform: scale(1); opacity: 1; }
+  }
+  .barter-value-reveal .value-reasoning {
+    font-size: 13px;
+    color: var(--text-faint);
+    margin-top: 8px;
+    font-style: italic;
+    line-height: 1.5;
+  }
+
+  /* Mini product grid */
+  .barter-products-label {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-faint);
+    margin: 28px 0 14px;
+    font-weight: 500;
+  }
+  .barter-products-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .barter-product-card {
+    border: 1px solid var(--border-light);
+    border-radius: 4px;
+    padding: 14px;
+    cursor: pointer;
+    transition: border-color 0.3s, box-shadow 0.3s;
+    position: relative;
+    background: var(--cream);
+  }
+  .barter-product-card:hover {
+    border-color: var(--accent);
+    box-shadow: 0 2px 12px rgba(44, 36, 32, 0.08);
+  }
+  .barter-product-card .bp-icon {
+    font-size: 22px;
+    margin-bottom: 6px;
+  }
+  .barter-product-card .bp-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 15px;
+    margin-bottom: 4px;
+  }
+  .barter-product-card .bp-price {
+    font-size: 12px;
+    color: var(--text-faint);
+  }
+  .barter-product-card .bp-badge {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    padding: 3px 8px;
+    border-radius: 3px;
+    margin-top: 8px;
+    text-transform: uppercase;
+  }
+  .bp-badge.even {
+    background: #a8b5a0;
+    color: #fff;
+  }
+  .bp-badge.difference {
+    background: var(--accent);
+    color: #fff;
+  }
+  .bp-badge.credit {
+    background: #6a8e7f;
+    color: #fff;
+  }
+
+  /* Exchange comparison */
+  .barter-exchange {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+    margin-bottom: 24px;
+  }
+  .barter-exchange-side {
+    flex: 1;
+    text-align: center;
+    padding: 20px 12px;
+    border: 1px solid var(--border-light);
+    border-radius: 4px;
+    background: var(--cream);
+  }
+  .barter-exchange-side .ex-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--text-faint);
+    margin-bottom: 8px;
+  }
+  .barter-exchange-side .ex-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 18px;
+    margin-bottom: 4px;
+  }
+  .barter-exchange-side .ex-value {
+    font-size: 14px;
+    color: var(--text-faint);
+  }
+  .barter-exchange-arrow {
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    color: var(--text-faint);
+    padding-top: 30px;
+  }
+  .barter-math {
+    background: var(--cream);
+    border: 1px solid var(--border-light);
+    border-radius: 4px;
+    padding: 20px;
+    margin-bottom: 24px;
+    font-size: 14px;
+    line-height: 2;
+  }
+  .barter-math .math-row {
+    display: flex;
+    justify-content: space-between;
+  }
+  .barter-math .math-total {
+    border-top: 1px solid var(--border-light);
+    padding-top: 8px;
+    margin-top: 4px;
+    font-weight: 600;
+  }
+
+  /* Success state */
+  .barter-success {
+    text-align: center;
+    padding: 20px 0;
+  }
+  .barter-success .success-icon {
+    font-size: 48px;
+    margin-bottom: 16px;
+  }
+  .barter-success .success-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    margin-bottom: 8px;
+  }
+  .barter-success .success-desc {
+    font-size: 13px;
+    color: var(--text-faint);
+    line-height: 1.6;
+    margin-bottom: 24px;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  /* Barter link in product modal */
+  .modal-barter-link {
+    text-align: center;
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--text-faint);
+    cursor: pointer;
+  }
+  .modal-barter-link:hover { color: var(--accent); }
+
+  /* Nav barter link */
+  .nav-barter { color: var(--accent) !important; }
+
   /* ===== STICKY MOBILE ADD-TO-CART (#3) ===== */
   .sticky-mobile-bar {
     display: none;
@@ -1142,6 +1516,10 @@
     .sticky-mobile-bar { display: block; }
     body { padding-bottom: 70px; }
     .cart-drawer { width: 100%; max-width: 100vw; }
+    .barter-modal { width: 100vw; max-width: 100vw; padding: 40px 24px 32px; border-radius: 0; max-height: 100vh; }
+    .barter-exchange { flex-direction: column; }
+    .barter-exchange-arrow { padding-top: 0; justify-content: center; }
+    .barter-products-grid { grid-template-columns: 1fr; }
   }
 </style>
 </head>
@@ -1149,7 +1527,7 @@
 
 <!-- ANNOUNCEMENT BAR -->
 <div class="announcement-bar">
-  Complimentary shipping on orders over $75 <span>&middot;</span> Made with care in a world that may not reciprocate <span>&middot;</span> Code KEEPGOING for 15% off
+  Complimentary shipping on orders over $75 <span>&middot;</span> <span style="cursor:pointer" onclick="openBarter()">The Boulder Exchange is open &mdash; trade what you have</span> <span>&middot;</span> Code KEEPGOING for 15% off
 </div>
 
 <!-- HEADER -->
@@ -1161,6 +1539,7 @@
       <a href="#featured">Favorites</a>
       <a href="#values">Our Why</a>
       <a href="#philosophy">Philosophy</a>
+      <a href="#" class="nav-barter" onclick="openBarter(); return false;">Barter</a>
       <a href="#newsletter">Journal</a>
     </nav>
     <div class="nav-icons">
@@ -1501,6 +1880,7 @@
       <div class="modal-desc" id="modal-desc"></div>
       <div class="modal-features" id="modal-features"></div>
       <button class="add-to-cart" id="modal-add-btn">Add to Bag</button>
+      <div class="modal-barter-link" onclick="openBarterForProduct(currentModalIndex)">or trade something for it</div>
       <div class="modal-shipping">Complimentary shipping over $75 &middot; Returns within 30 days, no questions. We get it.</div>
     </div>
   </div>
@@ -1534,6 +1914,50 @@
 <!-- STICKY MOBILE BAR (#3) -->
 <div class="sticky-mobile-bar">
   <a href="#products">Shop the Collection</a>
+</div>
+
+<!-- BARTER MODAL — THE BOULDER EXCHANGE -->
+<div class="barter-overlay" id="barter-overlay" onclick="closeBarter()"></div>
+<div class="barter-modal" id="barter-modal">
+  <button class="barter-close" onclick="closeBarter()" aria-label="Close">&times;</button>
+  <div class="barter-title">The Boulder Exchange</div>
+  <div class="barter-subtitle">Money is a shared hallucination. Let&rsquo;s try a different one.</div>
+  <div class="barter-progress" id="barter-progress">
+    <span class="barter-dot active"></span>
+    <span class="barter-dot"></span>
+    <span class="barter-dot"></span>
+    <span class="barter-dot"></span>
+  </div>
+  <div class="barter-steps">
+    <!-- Step 1: What've You Got? -->
+    <div class="barter-step active" id="barter-step-1">
+      <div class="barter-label">What&rsquo;ve you got?</div>
+      <input class="barter-input" id="barter-item-name" type="text" placeholder="e.g. a slightly haunted typewriter" autocomplete="off">
+      <div class="barter-label">Condition</div>
+      <select class="barter-select" id="barter-condition">
+        <option value="pristine">Pristine (suspicious)</option>
+        <option value="gently" selected>Gently Used (the honest answer)</option>
+        <option value="well-loved">Well-Loved (a generous interpretation)</option>
+        <option value="barely">Held Together by Hope (relatable)</option>
+      </select>
+      <div class="barter-label">Description (optional)</div>
+      <input class="barter-input" id="barter-desc" type="text" placeholder="Tell us more, if you want. We&rsquo;re listening.">
+      <button class="barter-btn" id="barter-appraise-btn" onclick="startAppraisal()">Appraise This</button>
+    </div>
+    <!-- Step 2: The Appraisal -->
+    <div class="barter-step" id="barter-step-2">
+      <div id="barter-appraisal-anim"></div>
+      <div id="barter-appraisal-result" style="display:none"></div>
+    </div>
+    <!-- Step 3: The Exchange -->
+    <div class="barter-step" id="barter-step-3">
+      <div id="barter-exchange-view"></div>
+    </div>
+    <!-- Step 4: Trade Accepted -->
+    <div class="barter-step" id="barter-step-4">
+      <div id="barter-success-view"></div>
+    </div>
+  </div>
 </div>
 
 <script>
@@ -1754,6 +2178,7 @@ document.addEventListener('keydown', e => {
   if (e.key === 'Escape') {
     forceCloseModal();
     closeCartDrawer();
+    closeBarter();
   }
 });
 
@@ -1771,8 +2196,13 @@ function addToCart(index) {
   renderCartItems();
 }
 
-function removeFromCart(index) {
-  cart = cart.filter(item => item.index !== index);
+function removeFromCart(index, cartIdx) {
+  if (cartIdx >= 0) {
+    cart.splice(cartIdx, 1);
+  } else {
+    const i = cart.findIndex(item => item.index === index && !item.barter);
+    if (i !== -1) cart.splice(i, 1);
+  }
   updateCartCount();
   renderCartItems();
 }
@@ -1823,10 +2253,17 @@ function renderCartItems() {
 
   let html = '';
   let total = 0;
-  cart.forEach(item => {
+  cart.forEach((item, ci) => {
     const p = products[item.index];
-    const lineTotal = p.priceNum * item.qty;
+    const linePrice = item.barter ? item.barter.adjustedPrice : p.priceNum;
+    const lineTotal = linePrice * item.qty;
     total += lineTotal;
+    const barterNote = item.barter
+      ? `<div style="font-size:11px;color:var(--accent);margin-top:4px;">Via Boulder Exchange — traded "${item.barter.itemName}"</div>`
+      : '';
+    const displayPrice = item.barter
+      ? `$${item.barter.adjustedPrice.toFixed(2)}${item.qty > 1 ? ` × ${item.qty}` : ''}`
+      : `${p.price}${item.qty > 1 ? ` × ${item.qty}` : ''}`;
     html += `
       <div class="cart-drawer-item">
         <div class="cart-drawer-item-img">
@@ -1834,13 +2271,250 @@ function renderCartItems() {
         </div>
         <div class="cart-drawer-item-info">
           <div class="cart-drawer-item-name">${p.name}</div>
-          <div class="cart-drawer-item-price">${p.price}${item.qty > 1 ? ` × ${item.qty}` : ''}</div>
-          <button class="cart-drawer-item-remove" onclick="removeFromCart(${item.index})">Remove</button>
+          <div class="cart-drawer-item-price">${displayPrice}</div>
+          ${barterNote}
+          <button class="cart-drawer-item-remove" onclick="removeFromCart(${item.index}, ${item.barter ? ci : -1})">Remove</button>
         </div>
       </div>`;
   });
   container.innerHTML = html;
   document.getElementById('cart-total').textContent = '$' + total.toFixed(2);
+}
+
+// ===== BARTER SYSTEM — THE BOULDER EXCHANGE =====
+const barterState = { step: 1, itemName: '', condition: '', desc: '', appraisedValue: 0, selectedProduct: null, preselectedProduct: null };
+
+function openBarter() {
+  barterState.step = 1;
+  barterState.preselectedProduct = null;
+  document.getElementById('barter-item-name').value = '';
+  document.getElementById('barter-condition').selectedIndex = 1;
+  document.getElementById('barter-desc').value = '';
+  barterGoToStep(1);
+  document.getElementById('barter-overlay').classList.add('active');
+  document.getElementById('barter-modal').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function openBarterForProduct(prodIndex) {
+  forceCloseModal();
+  barterState.preselectedProduct = prodIndex;
+  openBarter();
+}
+
+function closeBarter() {
+  document.getElementById('barter-overlay').classList.remove('active');
+  document.getElementById('barter-modal').classList.remove('active');
+  if (!document.getElementById('modal').classList.contains('active')) {
+    document.body.style.overflow = '';
+  }
+}
+
+function barterGoToStep(n) {
+  barterState.step = n;
+  for (let i = 1; i <= 4; i++) {
+    const el = document.getElementById('barter-step-' + i);
+    el.classList.toggle('active', i === n);
+  }
+  const dots = document.querySelectorAll('#barter-progress .barter-dot');
+  dots.forEach((dot, i) => dot.classList.toggle('active', i < n));
+}
+
+function barterHash(str) {
+  let hash = 5381;
+  for (let i = 0; i < str.length; i++) {
+    hash = ((hash << 5) + hash + str.charCodeAt(i)) & 0x7fffffff;
+  }
+  return hash;
+}
+
+function appraiseItem(name, condition) {
+  const lower = name.toLowerCase().trim();
+  const hash = barterHash(lower);
+  let base = 5 + (hash % 120);
+
+  const conditionMultipliers = { pristine: 1.0, gently: 0.75, 'well-loved': 0.55, barely: 0.35 };
+  base *= (conditionMultipliers[condition] || 0.75);
+
+  const keywords = [
+    ['boulder', 50], ['rock', 30], ['stone', 25], ['camus', 80], ['sisyphus', 100],
+    ['absurd', 40], ['existential', 35], ['haunted', 35], ['vintage', 20],
+    ['antique', 25], ['rare', 30], ['gold', 45], ['diamond', 60],
+    ['soul', 70], ['meaning', 55], ['hope', 40], ['void', 30]
+  ];
+  let bonus = 0;
+  let bonusReason = '';
+  for (const [kw, val] of keywords) {
+    if (lower.includes(kw)) {
+      bonus += val;
+      bonusReason = kw;
+    }
+  }
+  let value = Math.round((base + bonus) * 100) / 100;
+  value = Math.max(3, Math.min(200, value));
+  return { value, bonusReason };
+}
+
+function startAppraisal() {
+  const name = document.getElementById('barter-item-name').value.trim();
+  if (!name) { document.getElementById('barter-item-name').focus(); return; }
+  barterState.itemName = name;
+  barterState.condition = document.getElementById('barter-condition').value;
+  barterState.desc = document.getElementById('barter-desc').value.trim();
+
+  barterGoToStep(2);
+
+  const messages = [
+    'Consulting the void\u2026',
+    'Cross-referencing with the absurd\u2026',
+    'Asking Camus (he\u2019s not answering)\u2026',
+    'Weighing against a small boulder\u2026',
+    'Checking the existential market index\u2026'
+  ];
+
+  const animEl = document.getElementById('barter-appraisal-anim');
+  const resultEl = document.getElementById('barter-appraisal-result');
+  resultEl.style.display = 'none';
+  animEl.innerHTML = `<div class="barter-appraisal-status"><div class="spinner"></div><div class="status-text" id="barter-status-msg">${messages[0]}</div></div>`;
+
+  let msgIdx = 0;
+  const msgInterval = setInterval(() => {
+    msgIdx = (msgIdx + 1) % messages.length;
+    const el = document.getElementById('barter-status-msg');
+    if (el) el.textContent = messages[msgIdx];
+  }, 700);
+
+  setTimeout(() => {
+    clearInterval(msgInterval);
+    animEl.innerHTML = '';
+
+    const { value, bonusReason } = appraiseItem(barterState.itemName, barterState.condition);
+    barterState.appraisedValue = value;
+
+    const condLabels = { pristine: 'pristine', gently: 'gently used', 'well-loved': 'well-loved', barely: 'barely holding together' };
+    let reasoning = `We appraised your ${condLabels[barterState.condition] || ''} "${barterState.itemName}" using methods we cannot fully explain.`;
+    if (bonusReason) reasoning += ` The word "${bonusReason}" carried weight in our calculations.`;
+
+    resultEl.style.display = 'block';
+    resultEl.innerHTML = `
+      <div class="barter-value-reveal">
+        <div class="value-label">Appraised Value</div>
+        <div class="value-amount">$${value.toFixed(2)}</div>
+        <div class="value-reasoning">${reasoning}</div>
+      </div>
+      <div class="barter-products-label">What would you like to trade for?</div>
+      <div class="barter-products-grid" id="barter-product-grid"></div>
+      <div class="barter-back" onclick="barterGoToStep(1)">Actually, never mind (Sisyphus never could)</div>
+    `;
+    renderBarterProducts(value);
+
+    if (barterState.preselectedProduct !== null) {
+      selectBarterProduct(barterState.preselectedProduct);
+    }
+  }, 2800);
+}
+
+function renderBarterProducts(value) {
+  const grid = document.getElementById('barter-product-grid');
+  let html = '';
+  products.forEach((p, i) => {
+    const diff = p.priceNum - value;
+    let badge;
+    if (Math.abs(diff) < 0.50) {
+      badge = '<span class="bp-badge even">Even Trade</span>';
+    } else if (diff > 0) {
+      badge = `<span class="bp-badge difference">Pay $${diff.toFixed(2)}</span>`;
+    } else {
+      badge = `<span class="bp-badge credit">$${Math.abs(diff).toFixed(2)} credit</span>`;
+    }
+    html += `
+      <div class="barter-product-card" onclick="selectBarterProduct(${i})">
+        <div class="bp-icon">${p.icon}</div>
+        <div class="bp-name">${p.name}</div>
+        <div class="bp-price">${p.price}</div>
+        ${badge}
+      </div>`;
+  });
+  grid.innerHTML = html;
+}
+
+function selectBarterProduct(index) {
+  barterState.selectedProduct = index;
+  const p = products[index];
+  const diff = p.priceNum - barterState.appraisedValue;
+  const adjustedPrice = Math.max(0, diff);
+  const isEven = Math.abs(diff) < 0.50;
+  const isCredit = diff < -0.50;
+
+  let summaryText;
+  if (isEven) {
+    summaryText = 'An even trade. Sisyphus would approve, if he approved of anything.';
+  } else if (isCredit) {
+    summaryText = `Your item is worth more than this product. We\u2019ll apply the $${Math.abs(diff).toFixed(2)} credit to your account (which does not exist, but the gesture stands).`;
+  } else {
+    summaryText = `Pay the difference of $${adjustedPrice.toFixed(2)} and the trade is done.`;
+  }
+
+  barterGoToStep(3);
+  document.getElementById('barter-exchange-view').innerHTML = `
+    <div class="barter-exchange">
+      <div class="barter-exchange-side">
+        <div class="ex-label">Your Item</div>
+        <div class="ex-name">${barterState.itemName}</div>
+        <div class="ex-value">Appraised at $${barterState.appraisedValue.toFixed(2)}</div>
+      </div>
+      <div class="barter-exchange-arrow">\u21C4</div>
+      <div class="barter-exchange-side">
+        <div class="ex-label">You Receive</div>
+        <div class="ex-name">${p.name}</div>
+        <div class="ex-value">${p.price}</div>
+      </div>
+    </div>
+    <div class="barter-math">
+      <div class="math-row"><span>${p.name}</span><span>${p.price}</span></div>
+      <div class="math-row"><span>Your trade-in ("${barterState.itemName}")</span><span>\u2212 $${barterState.appraisedValue.toFixed(2)}</span></div>
+      <div class="math-row math-total"><span>${isEven ? 'Even Trade' : (isCredit ? 'Credit' : 'You Pay')}</span><span>${isEven ? '$0.00' : (isCredit ? '$0.00' : '$' + adjustedPrice.toFixed(2))}</span></div>
+    </div>
+    <div style="font-size:13px;color:var(--text-faint);text-align:center;margin-bottom:20px;font-style:italic;">${summaryText}</div>
+    <button class="barter-btn" onclick="completeBarter()">Complete the Trade</button>
+    <div class="barter-back" onclick="barterGoToStep(2);document.getElementById('barter-appraisal-result').style.display='block';">Go back</div>
+  `;
+}
+
+function completeBarter() {
+  const p = products[barterState.selectedProduct];
+  const diff = p.priceNum - barterState.appraisedValue;
+  const adjustedPrice = Math.max(0, Math.round(diff * 100) / 100);
+
+  cart.push({
+    index: barterState.selectedProduct,
+    qty: 1,
+    barter: {
+      itemName: barterState.itemName,
+      appraisedValue: barterState.appraisedValue,
+      adjustedPrice: adjustedPrice
+    }
+  });
+  updateCartCount();
+  renderCartItems();
+
+  barterGoToStep(4);
+  document.getElementById('barter-success-view').innerHTML = `
+    <div class="barter-success">
+      <div class="success-icon">\uD83E\uDEA8</div>
+      <div class="success-title">Trade Accepted</div>
+      <div class="success-desc">
+        Your "${barterState.itemName}" has been exchanged for the ${p.name}.
+        Please ship your item to:<br><br>
+        <strong>Sisyphus Supply Co. — Boulder Exchange Dept.</strong><br>
+        742 Absurdist Way, Unit &infin;<br>
+        Oran, Algeria 31000<br><br>
+        <em>Allow 4\u20136 weeks, or longer if meaning is delayed in transit.</em>
+      </div>
+      <button class="barter-btn" onclick="closeBarter(); openCartDrawer();">View Bag</button>
+      <div class="barter-back" onclick="closeBarter()">Continue browsing</div>
+    </div>
+  `;
 }
 
 // ===== SCROLL ANIMATIONS (#1) =====
